@@ -40,8 +40,10 @@ import java.util.List;
 
 @Service
 public class CommentsServiceImpl implements CommentsService {
+
     @Autowired
     private CommentMapper commentMapper;
+
     @Autowired
     private SysUserService sysUserService;
 

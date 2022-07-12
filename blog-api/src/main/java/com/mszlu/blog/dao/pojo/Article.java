@@ -24,10 +24,12 @@ public class Article {
      * 作者id
      */
     private Long authorId;
+
     /**
      * 内容id
      */
     private Long bodyId;
+
     /**
      *类别id
      */
@@ -37,7 +39,6 @@ public class Article {
      * 置顶
      */
     private Integer weight;
-
 
     /**
      * 创建时间

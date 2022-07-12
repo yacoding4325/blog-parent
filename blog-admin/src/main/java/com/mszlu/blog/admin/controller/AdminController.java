@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("admin")
-@SuppressWarnings({"all"})
 public class AdminController {
 
     @Autowired

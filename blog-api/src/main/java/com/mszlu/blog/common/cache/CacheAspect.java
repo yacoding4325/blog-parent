@@ -31,8 +31,8 @@ public class CacheAspect {
     private RedisTemplate<String, String> redisTemplate;
 
     @Pointcut("@annotation(com.mszlu.blog.common.cache.Cache)")
-    public void pt(){}
 
+    public void pt(){}
     @Around("pt()")
     public Object around(ProceedingJoinPoint pjp){
         try {
@@ -41,8 +41,6 @@ public class CacheAspect {
             String className = pjp.getTarget().getClass().getSimpleName();
             //调用的方法名
             String methodName = signature.getName();
-
-
             Class[] parameterTypes = new Class[pjp.getArgs().length];
             Object[] args = pjp.getArgs();
             //参数

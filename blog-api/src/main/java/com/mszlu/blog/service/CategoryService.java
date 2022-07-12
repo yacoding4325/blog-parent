@@ -11,6 +11,6 @@ public interface CategoryService {//创建一个接口，将文章类别信息�
 
     Result findAllDetail();//找到文章分类
 
-
     Result categoryDetailById(Long id);//得到分类文章列表
+
 }

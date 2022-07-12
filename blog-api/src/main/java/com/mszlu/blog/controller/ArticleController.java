@@ -21,6 +21,7 @@ public class ArticleController {
      * @param pageParams
      * @return
      */
+
     @PostMapping
     //加上此注解 代表要对此接口记录日志
     @LogAnnotation(module="文章",operator="获取文章列表")
@@ -61,7 +62,6 @@ public class ArticleController {
         return articleService.listArchives();
     }
 
-
     @PostMapping("view/{id}")
     @Cache(expire = 5 * 60 * 1000,name = "view_article")
     public Result findArticleById(@PathVariable("id") Long articleId){
@@ -72,7 +72,6 @@ public class ArticleController {
     //请求方式：POST
     @PostMapping("publish")
     public Result publish(@RequestBody ArticleParam articleParam){
-
         return articleService.publish(articleParam);
     }
 

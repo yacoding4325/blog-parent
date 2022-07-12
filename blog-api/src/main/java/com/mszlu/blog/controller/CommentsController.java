@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("comments")
-@SuppressWarnings({"all"})
 public class CommentsController {
 
     @Autowired
     private CommentsService commentsService;
 
-    @GetMapping("article/{id}")
+    @GetMapping("article/{id}")//查询用户ID
     public Result comments(@PathVariable("id") Long id){
         return commentsService.commentsByArticleId(id);
     }
