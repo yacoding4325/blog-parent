@@ -6,10 +6,26 @@ import com.mszlu.blog.vo.UserVo;
 
 public interface SysUserService {
 
+    /**
+     *查询作者的ID号
+     * @param id
+     * @return
+     */
     UserVo findUserVoById(Long id);
 
+    /**
+     *查询用户id号
+     * @param id
+     * @return
+     */
     SysUser findUserById(Long id);
 
+    /**
+     *输入用户名和密码
+     * @param account
+     * @param password
+     * @return
+     */
     SysUser findUser(String account, String password);
 
     /**

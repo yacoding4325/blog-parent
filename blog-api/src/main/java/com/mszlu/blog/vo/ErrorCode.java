@@ -10,10 +10,10 @@ public enum  ErrorCode {
     SESSION_TIME_OUT(90001,"会话超时"),
     NO_LOGIN(90002,"未登录"),;
 
-    private int code;
+    private Integer code;
     private String msg;
 
-    ErrorCode(int code, String msg){
+    ErrorCode(Integer code, String msg){
         this.code = code;
         this.msg = msg;
     }
@@ -22,7 +22,7 @@ public enum  ErrorCode {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 

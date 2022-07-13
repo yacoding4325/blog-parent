@@ -6,7 +6,6 @@ import com.mszlu.blog.vo.params.LoginParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@SuppressWarnings({"all"})
 @RestController
 @RequestMapping("login")
 public class LoginController {

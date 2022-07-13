@@ -3,6 +3,7 @@ package com.mszlu.blog.vo;
 import lombok.Data;
 
 @Data
+
 public class LoginUserVo {
 
     private String id;

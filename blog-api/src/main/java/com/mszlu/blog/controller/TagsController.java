@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController//返回json数据‘
 @RequestMapping("tags")//映射路径
 public class TagsController {
+
     @Autowired
     private TagService tagService;
 

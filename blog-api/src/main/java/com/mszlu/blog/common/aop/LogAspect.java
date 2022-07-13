@@ -56,8 +56,6 @@ public class LogAspect {
         //获取request 设置IP地址
         HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
         log.info("ip:{}", IpUtils.getIpAddr(request));
-
-
         log.info("excute time : {} ms",time);
         log.info("=====================log end================================");
     }

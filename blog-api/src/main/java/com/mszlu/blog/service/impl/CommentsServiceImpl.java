@@ -19,25 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.mszlu.blog.dao.mapper.CommentMapper;
-import com.mszlu.blog.dao.pojo.Comment;
-import com.mszlu.blog.dao.pojo.SysUser;
-import com.mszlu.blog.service.CommentsService;
-import com.mszlu.blog.service.SysUserService;
-import com.mszlu.blog.utils.UserThreadLocal;
-import com.mszlu.blog.vo.CommentVo;
-import com.mszlu.blog.vo.Result;
-import com.mszlu.blog.vo.UserVo;
-import com.mszlu.blog.vo.params.CommentParam;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class CommentsServiceImpl implements CommentsService {
 

@@ -6,6 +6,7 @@ import com.mszlu.blog.vo.params.LoginParam;
 
 @SuppressWarnings({"all"})
 public interface LoginService {
+
     /**
      * 登录功能
      * @param loginParam
@@ -14,7 +15,6 @@ public interface LoginService {
     Result login(LoginParam loginParam);
 
     SysUser checkToken(String token);
-
 
     /**
      * 退出登录

@@ -14,14 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-@SuppressWarnings({"all"})
 @Service
 public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
     private SysUserMapper sysUserMapper;
+
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
+
     @Autowired
     private LoginService loginService;
 
@@ -96,6 +97,5 @@ public class SysUserServiceImpl implements SysUserService {
         //mybatis-plus
         this.sysUserMapper.insert(sysUser);
     }
-
 
 }

@@ -24,6 +24,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private SysUserService sysUserService;
+
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
 
@@ -114,9 +115,7 @@ public class LoginServiceImpl implements LoginService {
         sysUser.setStatus("");
         sysUser.setEmail("");
         this.sysUserService.save(sysUser);
-
         String token = JWTUtils.createToken(sysUser.getId());
-
         redisTemplate.opsForValue().set("TOKEN_"+token, JSON.toJSONString(sysUser),1, TimeUnit.DAYS);
         return Result.success(token);
     }
