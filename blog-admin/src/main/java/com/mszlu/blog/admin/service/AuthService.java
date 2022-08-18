@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
-@SuppressWarnings({"all"})
+
 public class AuthService {//权限认证
 
     @Autowired
