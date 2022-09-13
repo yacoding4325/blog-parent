@@ -34,6 +34,7 @@ public class ArticleListener implements RocketMQListener<ArticleMessage> {
     public void onMessage(ArticleMessage message) {
         log.info("收到的消息：{}",message);
         //做了什么，更新缓存
+
         //1.更新 查看文章详情的缓存
         Long articleId = message.getArticleId();
         String params = DigestUtils.md5Hex(articleId.toString());
