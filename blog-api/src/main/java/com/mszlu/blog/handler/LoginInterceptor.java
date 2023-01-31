@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 @Slf4j
-@SuppressWarnings({"all"})
 public class LoginInterceptor implements HandlerInterceptor {
 
     @Autowired

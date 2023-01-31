@@ -462,11 +462,16 @@ docker pull mysql:5.7
 
 
 
+18.RocketMQ启动失败
+![img.png](img/img.png)
 
 
+19.评论功能 --bug 修复
 
-
-
+Cause: com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Out of range value for column 'article_id' at row 1
+; Data truncation: Out of range value for column 'article_id' at row 1; nested exception is com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Out of range value for column 'article_id' at row 1
+原因：com.mysql.cj.jdbc.exceptions.MysqlDataTruncation:数据截断：第1行“article_id”列的值超出范围
+; 数据截断：第1行“article_id”列的值超出范围；嵌套异常为com.mysql.cj.jdbc.exceptions.MysqlDataTruncation:数据截断：第1行列“article_id”的值超出范围
 
 
 
