@@ -1,6 +1,7 @@
 package com.mszlu.blog.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.mszlu.blog.dao.mapper.ArticleMapper;
 import com.mszlu.blog.dao.pojo.Article;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,21 +40,21 @@ public class ThreadService {
     @Async("taskExecutor")//执行线程池
     public void updateArticleViewCount(ArticleMapper articleMapper, Article article) {
 
-//        int viewCounts = article.getViewCounts();
-//        Article articleUpdate = new Article();
-//        articleUpdate.setViewCounts(viewCounts +1);
-//        LambdaUpdateWrapper<Article> updateWrapper = new LambdaUpdateWrapper<>();
-//        updateWrapper.eq(Article::getId,article.getId());
+        int viewCounts = article.getViewCounts();
+        Article articleUpdate = new Article();
+        articleUpdate.setViewCounts(viewCounts +1);
+        LambdaUpdateWrapper<Article> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(Article::getId,article.getId());
         //设置一个 为了在多线程的环境下 线程安全
-//        updateWrapper.eq(Article::getViewCounts,viewCounts);
-        // update article set view_count=100 where view_count=99 and id=11
-//        articleMapper.update(articleUpdate,updateWrapper);
-//        try {
-//            Thread.sleep(5000);
-//            System.out.println("更新完成了....");
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        updateWrapper.eq(Article::getViewCounts,viewCounts);
+//         update article set view_count=100 where view_count=99 and id=11
+        articleMapper.update(articleUpdate,updateWrapper);
+        try {
+            Thread.sleep(5000);
+            System.out.println("更新完成了....");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         //采用redis进行浏览量的增加
         //hash结构 key 浏览量标识 field 文章id  后面1 表示自增加1
         redisTemplate.opsForHash().increment("view_count",String.valueOf(article.getId()),1);
