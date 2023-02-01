@@ -47,58 +47,58 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleTagMapper articleTagMapper;
 
-    public Result listArticle(PageParams pageParams) {
-        /**
-         * 1.分页查询 article 数据库表
-         */
-        Page<Article> page = new Page<>(pageParams.getPage(), pageParams.getPageSize());
-        IPage<Article> articleIPage = articleMapper.listArticle(
-                page,
-                pageParams.getCategoryId(),
-                pageParams.getTagId(),
-                pageParams.getYear(),
-                pageParams.getMonth());
-        List<Article> records = articleIPage.getRecords();
-        return Result.success(copyList(articleIPage.getRecords(),true,true));
-    }
-
-//注释了mybatis Plus 自己实现mysql
-//    @Override
 //    public Result listArticle(PageParams pageParams) {
 //        /**
-//         * 1.分页查询 article数据库表
+//         * 1.分页查询 article 数据库表
 //         */
 //        Page<Article> page = new Page<>(pageParams.getPage(), pageParams.getPageSize());
-//        LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
-//        if (pageParams.getCategoryId() != null) {
-//            //and category_id=#{categoryId}
-//            queryWrapper.eq(Article::getCategoryId, pageParams.getCategoryId());
-//        }
-//        List<Long> articleIdList = new ArrayList<>();
-//        if (pageParams.getTagId() != null) {
-//            //加入标签 条件查询
-//            //article表中 并没有tag字段 一篇文章 有多个标签
-//            //article_tag article_id 1:n  tag_id
-//            LambdaQueryWrapper<ArticleTag> articleTagLambdaQueryWrapper = new LambdaQueryWrapper<>();
-//            articleTagLambdaQueryWrapper.eq(ArticleTag::getTagId, pageParams.getTagId());
-//            List<ArticleTag> articleTags = articleTagMapper.selectList(articleTagLambdaQueryWrapper);
-//            for (ArticleTag articleTag :articleTags) {
-//                articleIdList.add(articleTag.getArticleId());
-//            }
-//            if (articleIdList.size() > 0) {
-//                //and id in(1,2,3)
-//                queryWrapper.in(Article::getId, articleIdList);
-//            }
-//        }
-//        //是否进行置顶排序
-//        //order by create_date desc
-//        queryWrapper.orderByDesc(Article::getWeight, Article::getCreateDate);//先置顶排序，再时间排序
-//        Page<Article> articlePage = articleMapper.selectPage(page, queryWrapper);
-//        List<Article> records = articlePage.getRecords();
-//        //不能直接返回
-//        List<ArticleVo> articleVoList = copyList(records,true, true);
-//        return Result.success(articleVoList);
+//        IPage<Article> articleIPage = articleMapper.listArticle(
+//                page,
+//                pageParams.getCategoryId(),
+//                pageParams.getTagId(),
+//                pageParams.getYear(),
+//                pageParams.getMonth());
+//        List<Article> records = articleIPage.getRecords();
+//        return Result.success(copyList(articleIPage.getRecords(),true,true));
 //    }
+
+//注释了mybatis Plus 自己实现mysql
+    @Override
+    public Result listArticle(PageParams pageParams) {
+        /**
+         * 1.分页查询 article数据库表
+         */
+        Page<Article> page = new Page<>(pageParams.getPage(), pageParams.getPageSize());
+        LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
+        if (pageParams.getCategoryId() != null) {
+            //and category_id=#{categoryId}
+            queryWrapper.eq(Article::getCategoryId, pageParams.getCategoryId());
+        }
+        List<Long> articleIdList = new ArrayList<>();
+        if (pageParams.getTagId() != null) {
+            //加入标签 条件查询
+            //article表中 并没有tag字段 一篇文章 有多个标签
+            //article_tag article_id 1:n  tag_id
+            LambdaQueryWrapper<ArticleTag> articleTagLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            articleTagLambdaQueryWrapper.eq(ArticleTag::getTagId, pageParams.getTagId());
+            List<ArticleTag> articleTags = articleTagMapper.selectList(articleTagLambdaQueryWrapper);
+            for (ArticleTag articleTag :articleTags) {
+                articleIdList.add(articleTag.getArticleId());
+            }
+            if (articleIdList.size() > 0) {
+                //and id in(1,2,3)
+                queryWrapper.in(Article::getId, articleIdList);
+            }
+        }
+        //是否进行置顶排序
+        //order by create_date desc
+        queryWrapper.orderByDesc(Article::getWeight, Article::getCreateDate);//先置顶排序，再时间排序
+        Page<Article> articlePage = articleMapper.selectPage(page, queryWrapper);
+        List<Article> records = articlePage.getRecords();
+        //不能直接返回
+        List<ArticleVo> articleVoList = copyList(records,true, true);
+        return Result.success(articleVoList);
+    }
 
     @Override
     public Result hotArticle(int limit) {
@@ -143,8 +143,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-    @Autowired
-    private RocketMQTemplate rocketMQTemplate;
+//    @Autowired
+//    private RocketMQTemplate rocketMQTemplate;
 
     @Override
     public Result findArticleById(Long articleId) {
@@ -244,7 +244,7 @@ public class ArticleServiceImpl implements ArticleService {
             //发送一条消息给rocketmq 当前文章更新了，更新一下缓存吧
             ArticleMessage articleMessage = new ArticleMessage();
             articleMessage.setArticleId(article.getId());
-            rocketMQTemplate.convertAndSend("blog-update-article",articleMessage);
+//            rocketMQTemplate.convertAndSend("blog-update-article",articleMessage);
         }
         return Result.success(map);
     }
