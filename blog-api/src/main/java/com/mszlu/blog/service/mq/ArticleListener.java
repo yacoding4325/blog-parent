@@ -22,7 +22,7 @@ import java.util.Set;
 
 @Slf4j
 @Component
- //@RocketMQMessageListener(topic = "blog-update-article",consumerGroup = "blog-update-article-group")
+ @RocketMQMessageListener(topic = "blog-update-article",consumerGroup = "blog-update-article-group")
 public class ArticleListener implements RocketMQListener<ArticleMessage> {
     @Autowired
     private ArticleService articleService;

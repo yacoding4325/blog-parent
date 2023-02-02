@@ -143,8 +143,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-//    @Autowired
-//    private RocketMQTemplate rocketMQTemplate;
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
 
     @Override
     public Result findArticleById(Long articleId) {
@@ -244,7 +244,7 @@ public class ArticleServiceImpl implements ArticleService {
             //发送一条消息给rocketmq 当前文章更新了，更新一下缓存吧
             ArticleMessage articleMessage = new ArticleMessage();
             articleMessage.setArticleId(article.getId());
-//            rocketMQTemplate.convertAndSend("blog-update-article",articleMessage);
+            rocketMQTemplate.convertAndSend("blog-update-article",articleMessage);
         }
         return Result.success(map);
     }
